@@ -11,12 +11,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.purenative.plumbus.core.ui.theme.PlumbusTheme
+import com.purenative.plumbus.features.characters.CharactersViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
+
+    private val charactersViewModel: CharactersViewModel by inject()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("Test")
+        charactersViewModel.getCharacters()
         setContent {
             PlumbusTheme {
                 // A surface container using the 'background' color from the theme
