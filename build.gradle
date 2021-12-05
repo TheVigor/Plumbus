@@ -1,6 +1,7 @@
 buildscript {
     ext {
         activity_compose_version = '1.4.0'
+        coil_version = '1.4.0'
         compose_version = '1.0.5'
         core_ktx_version = '1.7.0'
         koin_version = '3.1.4'
