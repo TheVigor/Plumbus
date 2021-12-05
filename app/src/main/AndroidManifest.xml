@@ -3,7 +3,9 @@
     package="com.purenative.plumbus">
 
     <application
-        android:allowBackup="true"
+        android:name=".PlumbusApplication"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"

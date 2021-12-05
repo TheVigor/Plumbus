@@ -48,13 +48,16 @@ android {
 dependencies {
 
     // AndroidX
-    implementation "androidx.core:core-ktx:$core_ktx"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime_ktx"
-    implementation "androidx.activity:activity-compose:$activity_compose"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime_ktx_version"
+    implementation "androidx.activity:activity-compose:$activity_compose_version"
 
     // Compose
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }

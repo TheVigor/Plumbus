@@ -1,4 +1,4 @@
-package com.purenative.plumbus.ui.theme
+package com.purenative.plumbus.core.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
