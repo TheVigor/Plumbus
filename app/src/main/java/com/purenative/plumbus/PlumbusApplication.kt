@@ -2,21 +2,17 @@ package com.purenative.plumbus
 
 import android.app.Application
 import com.purenative.plumbus.core.base.appinitializers.AppInitializers
-import com.purenative.plumbus.core.base.appinitializers.TimberInitializer
-import com.purenative.plumbus.core.base.logging.TimberLogger
+import com.purenative.plumbus.core.base.appinitializers.KoinInitializer
+import org.koin.android.ext.android.inject
 
-class PlumbusApplication: Application() {
+class PlumbusApplication : Application() {
 
-    private val initializers by lazy {
-        AppInitializers(
-            setOf(
-                TimberInitializer(TimberLogger())
-            )
-        )
-    }
+    private val diInitializer by lazy { KoinInitializer() }
+    private val initializers by inject<AppInitializers>()
 
     override fun onCreate() {
         super.onCreate()
+        diInitializer.init(this)
         initializers.init(this)
     }
 }
