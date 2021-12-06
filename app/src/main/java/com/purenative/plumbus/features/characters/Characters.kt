@@ -24,7 +24,6 @@ internal fun Characters(
     viewModel: CharactersViewModel
 ) {
     val viewState by rememberFlowWithLifecycle(viewModel.state).collectAsState(CharactersViewState.EMPTY)
-    Timber.d("777: ${viewState.characters.size}")
     Characters(viewState = viewState)
 }
 

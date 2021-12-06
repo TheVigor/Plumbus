@@ -17,7 +17,7 @@ class CharactersRepositoryImpl(
     private val responseMapper: CharacterResponseToCharacterMapper): CharactersRepository {
     override fun observeCharacters(): Flow<List<Character>> {
         return flow {
-            plumbusApi.getCharacters().results.map { responseMapper.map(it) }
+            emit(plumbusApi.getCharacters().results.map { responseMapper.map(it) })
         }
     }
 }

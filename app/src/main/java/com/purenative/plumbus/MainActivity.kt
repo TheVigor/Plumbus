@@ -24,7 +24,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("Test")
         charactersViewModel.submitAction(CharactersAction.RefreshAction)
         setContent {
             PlumbusTheme {

@@ -2,6 +2,7 @@ package com.purenative.plumbus.features.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.purenative.plumbus.core.domain.models.characters.Character
 import com.purenative.plumbus.core.domain.observers.ObserveCharacters
 import com.purenative.plumbus.core.ui.ObservableLoadingCounter
 import kotlinx.coroutines.flow.*
@@ -17,7 +18,6 @@ class CharactersViewModel(observeCharacters: ObserveCharacters): ViewModel() {
         observeCharacters.flow,
         charactersLoadingState.observable
     ) { characters, refreshing ->
-        Timber.d("KEEEK: ${characters.size}")
         CharactersViewState(
             characters = characters,
             refreshing = refreshing
@@ -38,9 +38,6 @@ class CharactersViewModel(observeCharacters: ObserveCharacters): ViewModel() {
                 }
             }
 
-            observeCharacters.flow.collect {
-                Timber.d(it.size.toString())
-            }
         }
     }
 
