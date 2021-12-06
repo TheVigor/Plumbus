@@ -1,4 +1,4 @@
-package com.purenative.plumbus.core.data.characters
+package com.purenative.plumbus.core.data.models.characters
 
 import com.google.gson.annotations.SerializedName
 

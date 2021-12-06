@@ -1,9 +1,7 @@
 package com.purenative.plumbus.core.base.appinitializers
 
 import android.app.Application
-import com.purenative.plumbus.core.di.appInitializersModule
-import com.purenative.plumbus.core.di.dataModule
-import com.purenative.plumbus.core.di.viewModelModule
+import com.purenative.plumbus.core.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +15,9 @@ class KoinInitializer: AppInitializer {
                 listOf(
                     appInitializersModule(),
                     dataModule(),
-                    viewModelModule()
+                    viewModelModule(),
+                    mappersModule(),
+                    observersModule()
                 )
             )
         }

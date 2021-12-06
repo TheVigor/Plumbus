@@ -2,7 +2,7 @@ package com.purenative.plumbus.core.di
 
 import com.google.gson.GsonBuilder
 import com.purenative.plumbus.core.data.PlumbusApi
-import com.purenative.plumbus.core.data.characters.CharactersRepository
+import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -14,7 +14,7 @@ const val BASE_URL = "https://rickandmortyapi.com"
 fun dataModule() = module {
     single { createOkHttpClient() }
     single { createApi<PlumbusApi>(get()) }
-    single { CharactersRepository(get()) }
+    single { CharactersRepositoryImpl(get(), get()) }
 }
 
 fun createOkHttpClient(): OkHttpClient {
