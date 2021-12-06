@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Plumbus</string>
+    <string name="characters_title">Characters</string>
+    <string name="cd_characters_title">Characters</string>
+    <string name="following">Following</string>
+    <string name="cd_following">Following</string>
+    <string name="search">Search</string>
+    <string name="cd_search">Search</string>
 </resources>

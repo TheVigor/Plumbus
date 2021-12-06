@@ -14,6 +14,7 @@ import com.purenative.plumbus.core.ui.theme.PlumbusTheme
 import com.purenative.plumbus.features.characters.Characters
 import com.purenative.plumbus.features.characters.CharactersAction
 import com.purenative.plumbus.features.characters.CharactersViewModel
+import com.purenative.plumbus.features.home.Home
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -27,13 +28,7 @@ class MainActivity : ComponentActivity() {
         charactersViewModel.submitAction(CharactersAction.RefreshAction)
         setContent {
             PlumbusTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Characters()
-                }
+                Home()
             }
         }
     }
