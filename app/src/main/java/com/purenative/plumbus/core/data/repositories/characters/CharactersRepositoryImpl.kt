@@ -23,7 +23,7 @@ class CharactersRepositoryImpl(
     }
 
     override suspend fun getCharactersPage(page: Int): PageResponse<CharacterResponse>? {
-        return plumbusApi.getCharacters(page = 1).body()
+        return plumbusApi.getCharacters(page = page).body()
     }
 
 

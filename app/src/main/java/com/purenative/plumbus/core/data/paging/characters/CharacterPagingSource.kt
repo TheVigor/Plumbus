@@ -2,7 +2,6 @@ package com.purenative.plumbus.core.data.paging.characters
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.purenative.plumbus.core.data.PlumbusApi
 import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
 import com.purenative.plumbus.core.domain.models.characters.Character
 import retrofit2.HttpException

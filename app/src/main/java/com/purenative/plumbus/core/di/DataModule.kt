@@ -16,7 +16,6 @@ fun dataModule() = module {
     single { createOkHttpClient() }
     single { createApi<PlumbusApi>(get()) }
     single { CharactersRepositoryImpl(get(), get()) }
-    single { CharactersPagingSource(get()) }
 }
 
 fun createOkHttpClient(): OkHttpClient {

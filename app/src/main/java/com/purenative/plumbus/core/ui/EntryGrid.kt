@@ -112,14 +112,14 @@ private fun EntryGridAppBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        navigationIcon = {
-            IconButton(onClick = { onNavigateUp() }) {
-                Icon(
-                    Icons.Default.ArrowBack,
-                    contentDescription = stringResource(R.string.cd_navigate_up)
-                )
-            }
-        },
+//        navigationIcon = {
+//            IconButton(onClick = { onNavigateUp() }) {
+//                Icon(
+//                    Icons.Default.ArrowBack,
+//                    contentDescription = stringResource(R.string.cd_navigate_up)
+//                )
+//            }
+//        },
         backgroundColor = MaterialTheme.colors.surface.copy(
             alpha = AppBarAlphas.translucentBarAlpha()
         ),

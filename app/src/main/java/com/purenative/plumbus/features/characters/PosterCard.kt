@@ -41,20 +41,18 @@ fun PosterCard(
                         .align(Alignment.CenterStart)
                 )
             }
-//            if (poster != null) {
-//                Image(
-//                    painter = rememberImagePainter(poster) {
-//                        crossfade(true)
-//                    },
-//                    contentDescription = stringResource(
-//                        R.string.cd_show_poster_image,
-//                        character.name
-//
-//                    ),
-//                    modifier = Modifier.matchParentSize(),
-//                    contentScale = ContentScale.Crop,
-//                )
-//            }
+            Image(
+                painter = rememberImagePainter(character.image) {
+                    crossfade(true)
+                },
+                contentDescription = stringResource(
+                    R.string.cd_show_poster_image,
+                    character.name
+
+                ),
+                modifier = Modifier.matchParentSize(),
+                contentScale = ContentScale.Crop,
+            )
         }
     }
 }

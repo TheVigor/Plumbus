@@ -7,6 +7,7 @@ import com.purenative.plumbus.core.domain.models.characters.Character
 class CharacterResponseToCharacterMapper: Mapper<CharacterResponse, Character> {
     override suspend fun map(from: CharacterResponse) = Character(
         id = from.id,
-        name = from.name
+        name = from.name,
+        image = from.image
     )
 }

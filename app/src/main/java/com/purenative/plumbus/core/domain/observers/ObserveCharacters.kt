@@ -12,7 +12,7 @@ import com.purenative.plumbus.core.domain.models.characters.Character
 import kotlinx.coroutines.flow.Flow
 
 class ObserveCharacters(
-    private val charactersPagingSource: CharactersPagingSource,
+    private val charactersRepositoryImpl: CharactersRepositoryImpl
 ) : PagingInteractor<ObserveCharacters.Params, Character>() {
     override fun createObservable(
         params: Params
@@ -24,7 +24,7 @@ class ObserveCharacters(
 //                    UpdatePopularShows.Params(page = page, forceRefresh = true)
 //                )
 //            },
-            pagingSourceFactory = { charactersPagingSource }
+            pagingSourceFactory = { CharactersPagingSource(charactersRepositoryImpl) }
         ).flow
     }
 
