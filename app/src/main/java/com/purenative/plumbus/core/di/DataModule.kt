@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.purenative.plumbus.core.data.PlumbusApi
 import com.purenative.plumbus.core.data.PlumbusDatabase
-import com.purenative.plumbus.core.data.paging.characters.CharactersPagingSource
 import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
