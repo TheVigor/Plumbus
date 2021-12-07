@@ -1,7 +1,10 @@
 package com.purenative.plumbus.core.di
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.purenative.plumbus.core.data.PlumbusApi
+import com.purenative.plumbus.core.data.PlumbusDatabase
 import com.purenative.plumbus.core.data.paging.characters.CharactersPagingSource
 import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
 import okhttp3.OkHttpClient
@@ -15,7 +18,17 @@ const val BASE_URL = "https://rickandmortyapi.com"
 fun dataModule() = module {
     single { createOkHttpClient() }
     single { createApi<PlumbusApi>(get()) }
-    single { CharactersRepositoryImpl(get(), get()) }
+    single { CharactersRepositoryImpl(get(), get(), get(), get()) }
+    single { createDatabase(get()) }
+}
+
+fun createDatabase(context: Context): PlumbusDatabase {
+    return Room.databaseBuilder(
+        context,
+        PlumbusDatabase::class.java, "plumbus.db"
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 }
 
 fun createOkHttpClient(): OkHttpClient {

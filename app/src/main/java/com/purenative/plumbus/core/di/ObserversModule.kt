@@ -5,6 +5,6 @@ import org.koin.dsl.module
 
 fun observersModule() = module {
     single {
-        ObserveCharacters(get())
+        ObserveCharacters(get(), get())
     }
 }
