@@ -107,13 +107,10 @@ private fun NavGraphBuilder.addCharacters(
     root: Screen,
 ) {
     composable(LeafScreen.Characters.createRoute(root)) {
-        Text(
-           text = "Test"
+        Characters(
+            openCharacterDetails = {},
+            navigateUp = {}
         )
-//        Characters(
-//            openCharacterDetails = {},
-//            navigateUp = {}
-//        )
     }
 }
 
