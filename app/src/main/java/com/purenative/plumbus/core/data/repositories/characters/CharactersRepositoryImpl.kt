@@ -14,10 +14,17 @@ import kotlinx.coroutines.flow.flowOf
 
 class CharactersRepositoryImpl(
     private val plumbusApi: PlumbusApi,
-    private val responseMapper: CharacterResponseToCharacterMapper): CharactersRepository {
+    val responseMapper: CharacterResponseToCharacterMapper): CharactersRepository {
     override fun observeCharacters(): Flow<List<Character>> {
         return flow {
-            emit(plumbusApi.getCharacters().results.map { responseMapper.map(it) })
+            emit(plumbusApi.getCharacters(page = 1).body()?.results?.map { responseMapper.map(it) }
+                ?: emptyList())
         }
     }
+
+    override suspend fun getCharactersPage(page: Int): PageResponse<CharacterResponse>? {
+        return plumbusApi.getCharacters(page = 1).body()
+    }
+
+
 }

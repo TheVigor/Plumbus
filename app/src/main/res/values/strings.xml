@@ -6,4 +6,7 @@
     <string name="cd_following">Following</string>
     <string name="search">Search</string>
     <string name="cd_search">Search</string>
+    <string name="cd_navigate_up">Navigate Up</string>
+    <string name="cd_show_poster_image">Poster Image</string>
+    <string name="cd_refresh">Refresh</string>
 </resources>

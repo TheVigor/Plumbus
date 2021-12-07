@@ -2,6 +2,8 @@
 
 package com.purenative.plumbus.core.domain
 
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.purenative.plumbus.core.base.InvokeStatus
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
@@ -51,6 +53,12 @@ abstract class SuspendingWorkInteractor<P : Any, T> : SubjectInteractor<P, T>() 
     }
 
     abstract suspend fun doWork(params: P): T
+}
+
+abstract class PagingInteractor<P : PagingInteractor.Parameters<T>, T : Any> : SubjectInteractor<P, PagingData<T>>() {
+    interface Parameters<T : Any> {
+        val pagingConfig: PagingConfig
+    }
 }
 
 abstract class SubjectInteractor<P : Any, T> {

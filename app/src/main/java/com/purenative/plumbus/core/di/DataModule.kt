@@ -2,6 +2,7 @@ package com.purenative.plumbus.core.di
 
 import com.google.gson.GsonBuilder
 import com.purenative.plumbus.core.data.PlumbusApi
+import com.purenative.plumbus.core.data.paging.characters.CharactersPagingSource
 import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,6 +16,7 @@ fun dataModule() = module {
     single { createOkHttpClient() }
     single { createApi<PlumbusApi>(get()) }
     single { CharactersRepositoryImpl(get(), get()) }
+    single { CharactersPagingSource(get()) }
 }
 
 fun createOkHttpClient(): OkHttpClient {

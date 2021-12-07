@@ -7,38 +7,44 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.purenative.plumbus.R
 import com.purenative.plumbus.core.extensions.rememberFlowWithLifecycle
+import com.purenative.plumbus.core.ui.EntryGrid
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 
 @Composable
-fun Characters() {
+fun Characters(
+    openCharacterDetails: (characterId: Int) -> Unit,
+    navigateUp: () -> Unit
+) {
     Characters(
-        viewModel = getViewModel()
+        viewModel = getViewModel(),
+        openCharacterDetails = openCharacterDetails,
+        navigateUp = navigateUp
     )
 }
 
 @Composable
 internal fun Characters(
-    viewModel: CharactersViewModel
+    viewModel: CharactersViewModel,
+    openCharacterDetails: (characterId: Int) -> Unit,
+    navigateUp: () -> Unit
 ) {
-    val viewState by rememberFlowWithLifecycle(viewModel.state).collectAsState(CharactersViewState.EMPTY)
-    Characters(viewState = viewState)
+    EntryGrid(
+        lazyPagingItems = rememberFlowWithLifecycle(viewModel.pagedList).collectAsLazyPagingItems(),
+        title = stringResource(R.string.characters_title),
+        onOpenShowDetails = openCharacterDetails,
+        onNavigateUp = navigateUp,
+    )
 }
 
-@Composable
-internal fun Characters(
-    viewState: CharactersViewState
-) {
-    Text(text = viewState.characters.size.toString(), modifier = Modifier.fillMaxWidth())
-}
 
 
 @Preview
 @Composable
 private fun PreviewCharacters() {
-    Characters(
-        viewState = CharactersViewState.EMPTY
-    )
+    RefreshButton(onClick = { /*TODO*/ })
 }

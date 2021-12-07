@@ -1,6 +1,7 @@
 package com.purenative.plumbus.core.navigation
 
 import androidx.compose.animation.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.*
@@ -106,7 +107,13 @@ private fun NavGraphBuilder.addCharacters(
     root: Screen,
 ) {
     composable(LeafScreen.Characters.createRoute(root)) {
-        Characters()
+        Text(
+           text = "Test"
+        )
+//        Characters(
+//            openCharacterDetails = {},
+//            navigateUp = {}
+//        )
     }
 }
 
