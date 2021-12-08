@@ -34,8 +34,8 @@ private sealed class LeafScreen(
     object Following : LeafScreen(FOLLOWING_TAG)
 
     object CharacterDetails : LeafScreen("$CHARACTER_TAG/{characterId}") {
-        fun createRoute(root: Screen, characterId: Long): String {
-            return "${root.route}$CHARACTER_TAG/$characterId"
+        fun createRoute(root: Screen, characterId: Int): String {
+            return "${root.route}/$CHARACTER_TAG/$characterId"
         }
     }
     object Search : LeafScreen(SEARCH_TAG)
@@ -84,7 +84,7 @@ private fun NavGraphBuilder.addFollowingTopLevel(
         startDestination = LeafScreen.Following.createRoute(Screen.Following),
     ) {
         addFollowing(navController, Screen.Following)
-        addCharacterDetails(navController, Screen.Characters)
+        addCharacterDetails(navController, Screen.Following)
     }
 }
 
@@ -97,7 +97,7 @@ private fun NavGraphBuilder.addSearchTopLevel(
         startDestination = LeafScreen.Search.createRoute(Screen.Search),
     ) {
         addSearch(navController, Screen.Search)
-        addCharacterDetails(navController, Screen.Characters)
+        addCharacterDetails(navController, Screen.Search)
     }
 }
 
@@ -108,8 +108,10 @@ private fun NavGraphBuilder.addCharacters(
 ) {
     composable(LeafScreen.Characters.createRoute(root)) {
         Characters(
-            openCharacterDetails = {},
-            navigateUp = {}
+            openCharacterDetails = { characterId ->
+                navController.navigate(LeafScreen.CharacterDetails.createRoute(root, characterId))
+            },
+            navigateUp = navController::navigateUp
         )
     }
 }
@@ -136,6 +138,8 @@ private fun NavGraphBuilder.addSearch(
     }
 }
 
+const val CHARACTER_ID_ARG = "characterId"
+
 @ExperimentalAnimationApi
 private fun NavGraphBuilder.addCharacterDetails(
     navController: NavController,
@@ -144,10 +148,13 @@ private fun NavGraphBuilder.addCharacterDetails(
     composable(
         route = LeafScreen.CharacterDetails.createRoute(root),
         arguments = listOf(
-            navArgument("characterId") { type = NavType.LongType }
+            navArgument(CHARACTER_ID_ARG) { type = NavType.IntType }
         )
     ) {
+        val characterId = it.arguments?.getInt(CHARACTER_ID_ARG)!!
         CharacterDetails(
+            characterId = characterId,
+            navigateUp = navController::navigateUp
         )
     }
 }

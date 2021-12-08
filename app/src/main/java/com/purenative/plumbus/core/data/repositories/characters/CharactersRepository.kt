@@ -6,6 +6,9 @@ import com.purenative.plumbus.core.domain.models.characters.Character
 import kotlinx.coroutines.flow.Flow
 
 interface CharactersRepository {
-    fun observeCharacters(): Flow<List<Character>>
     suspend fun getCharactersPage(page: Int): PageResponse<CharacterResponse>?
+
+    suspend fun updateCharacter(id: Int)
+    fun observerCharacter(id: Int): Flow<Character>
+
 }

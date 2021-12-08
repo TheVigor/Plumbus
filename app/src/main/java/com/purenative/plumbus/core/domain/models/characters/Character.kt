@@ -4,4 +4,12 @@ data class Character(
     val id: Int,
     val name: String,
     val image: String
-)
+) {
+    companion object {
+        val EMPTY = Character(
+            id = 0,
+            name = "",
+            image = ""
+        )
+    }
+}

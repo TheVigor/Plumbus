@@ -17,8 +17,9 @@ const val BASE_URL = "https://rickandmortyapi.com"
 fun dataModule() = module {
     single { createOkHttpClient() }
     single { createApi<PlumbusApi>(get()) }
-    single { CharactersRepositoryImpl(get(), get(), get(), get()) }
+    single { CharactersRepositoryImpl(get(), get(), get(), get(), get()) }
     single { createDatabase(get()) }
+    single { (get() as PlumbusDatabase).charactersDao() }
 }
 
 fun createDatabase(context: Context): PlumbusDatabase {
@@ -29,6 +30,8 @@ fun createDatabase(context: Context): PlumbusDatabase {
         .fallbackToDestructiveMigration()
         .build()
 }
+
+
 
 fun createOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {

@@ -19,7 +19,8 @@ class KoinInitializer: AppInitializer {
                     dataModule(),
                     viewModelModule(),
                     mappersModule(),
-                    observersModule()
+                    observersModule(),
+                    interactorsModule()
                 )
             )
         }
