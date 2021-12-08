@@ -9,4 +9,7 @@
     <string name="cd_navigate_up">Navigate Up</string>
     <string name="cd_show_poster_image">Poster Image</string>
     <string name="cd_refresh">Refresh</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_follow_character_remove">Follow character remove</string>
+    <string name="cd_follow_character_add">Add Follow Character</string>
 </resources>

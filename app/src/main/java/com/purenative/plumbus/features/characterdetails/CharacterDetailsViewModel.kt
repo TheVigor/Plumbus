@@ -22,7 +22,7 @@ class CharacterDetailsViewModel(
     val state = combine(
         observeCharacterDetails.flow,
         flowOf(false),
-        flowOf(false)
+        loadingState.observable
     ) { character, isFollowed, refreshing ->
         CharacterDetailsViewState(
             character = character,
@@ -41,7 +41,7 @@ class CharacterDetailsViewModel(
                 when (action) {
                     CharacterDetailsAction.FollowShowToggleAction -> TODO()
                     CharacterDetailsAction.NavigateUp -> TODO()
-                    is CharacterDetailsAction.RefreshAction -> TODO()
+                    is CharacterDetailsAction.RefreshAction -> refresh()
                 }
             }
         }
@@ -52,7 +52,7 @@ class CharacterDetailsViewModel(
     }
 
     private fun refresh() {
-        updateCharacterDetails(UpdateCharacterDetails.Params(characterId = characterId))
+        updateCharacterDetails(UpdateCharacterDetails.Params(characterId = characterId)).watchStatus()
     }
 
     private fun Flow<InvokeStatus>.watchStatus() = viewModelScope.launch { collectStatus() }

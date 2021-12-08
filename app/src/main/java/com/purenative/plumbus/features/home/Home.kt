@@ -50,11 +50,12 @@ internal fun Home() {
                 modifier = Modifier.fillMaxWidth()
             )
         }
-    ) {
+    ) { contentPadding ->
         Row(Modifier.fillMaxSize()) {
             PlumbusNavigation(
                 navController = navController,
                 modifier = Modifier
+                    .padding(contentPadding)
                     .weight(1f)
                     .fillMaxHeight(),
             )
@@ -104,7 +105,6 @@ internal fun HomeBottomNavigation(
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.surface.copy(alpha = AppBarAlphas.translucentBarAlpha()),
         contentColor = contentColorFor(MaterialTheme.colors.surface),
-        //contentPadding = rememberInsetsPaddingValues(LocalWindowInsets.current.navigationBars),
         modifier = modifier
     ) {
         HomeNavigationItems.forEach { item ->
