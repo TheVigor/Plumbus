@@ -1,5 +1,7 @@
 package com.purenative.plumbus.core.domain.models.characters
 
+import com.purenative.plumbus.core.data.entities.FollowingCharacterEntity
+
 data class Character(
     val id: Int,
     val name: String,
@@ -12,4 +14,10 @@ data class Character(
             image = ""
         )
     }
+
+    fun toFollowingCharacterEntity() = FollowingCharacterEntity(
+        id = id,
+        name = name,
+        image = image
+    )
 }

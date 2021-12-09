@@ -123,6 +123,9 @@ private fun NavGraphBuilder.addFollowing(
 ) {
     composable(LeafScreen.Following.createRoute(root)) {
         Following(
+            openCharacterDetails = { characterId ->
+                navController.navigate(LeafScreen.CharacterDetails.createRoute(root, characterId))
+            },
         )
     }
 }

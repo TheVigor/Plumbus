@@ -45,9 +45,8 @@ fun CharacterDetails(
     viewState?.let { state ->
         CharacterDetails(viewState = state) { action ->
             when (action) {
-                CharacterDetailsAction.FollowShowToggleAction -> TODO()
                 CharacterDetailsAction.NavigateUp -> navigateUp()
-                is CharacterDetailsAction.RefreshAction -> viewModel.submitAction(action)
+                else -> viewModel.submitAction(action)
             }
         }
     }

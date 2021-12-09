@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(repos: List<CharacterEntity>)
+    suspend fun insertAll(characters: List<CharacterEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(character: CharacterEntity)
@@ -20,7 +20,10 @@ interface CharacterDao {
     fun getCharacters(): PagingSource<Int, CharacterEntity>
 
     @Query("SELECT * FROM characters WHERE id=:id")
-    fun getCharacter(id: Int): Flow<CharacterEntity>
+    fun observeCharacter(id: Int): Flow<CharacterEntity>
+
+    @Query("SELECT * FROM characters WHERE id=:id")
+    suspend fun getCharacter(id: Int): CharacterEntity?
 
     @Query("DELETE FROM characters")
     suspend fun clearCharacters()

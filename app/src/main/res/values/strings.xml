@@ -12,4 +12,7 @@
     <string name="cd_close">Close</string>
     <string name="cd_follow_character_remove">Follow character remove</string>
     <string name="cd_follow_character_add">Add Follow Character</string>
+    <string name="following_characters_title">Following</string>
+    <string name="filter">Filter characters</string>
+    <string name="cd_clear_text">Clear text</string>
 </resources>
