@@ -6,9 +6,6 @@ import com.purenative.plumbus.core.data.daos.CharacterDao
 import com.purenative.plumbus.core.data.daos.FollowingCharacterDao
 import com.purenative.plumbus.core.data.entities.CharacterEntity
 import com.purenative.plumbus.core.data.entities.FollowingCharacterEntity
-import com.purenative.plumbus.core.data.mappers.characters.CharacterEntityToCharacterMapper
-import com.purenative.plumbus.core.data.mappers.characters.CharacterToCharacterEntityMapper
-import com.purenative.plumbus.core.data.mappers.characters.CharacterResponseToCharacterMapper
 import com.purenative.plumbus.core.data.models.characters.CharacterResponse
 import com.purenative.plumbus.core.data.models.characters.PageResponse
 import com.purenative.plumbus.core.domain.models.characters.Character
@@ -18,10 +15,7 @@ import kotlinx.coroutines.flow.map
 class CharactersRepositoryImpl(
     private val plumbusApi: PlumbusApi,
     private val characterDao: CharacterDao,
-    private val followingCharacterDao: FollowingCharacterDao,
-    val responseMapper: CharacterResponseToCharacterMapper,
-    val entityMapper: CharacterToCharacterEntityMapper,
-    val domainMapper: CharacterEntityToCharacterMapper
+    private val followingCharacterDao: FollowingCharacterDao
 ): CharactersRepository {
 
     override suspend fun getCharactersPage(page: Int): PageResponse<CharacterResponse>? {
@@ -38,7 +32,7 @@ class CharactersRepositoryImpl(
     }
 
     override fun observerCharacter(id: Int): Flow<Character> {
-        return characterDao.observeCharacter(id).map { domainMapper.map(it) }
+        return characterDao.observeCharacter(id).map { it.toCharacter() }
     }
 
     override suspend fun getCharacter(id: Int): CharacterEntity? {

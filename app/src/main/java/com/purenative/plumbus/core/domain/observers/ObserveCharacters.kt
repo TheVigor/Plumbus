@@ -22,7 +22,7 @@ class ObserveCharacters(
             remoteMediator = CharacterRemoteMediator(charactersRepositoryImpl, plumbusDatabase),
             pagingSourceFactory =  { plumbusDatabase.charactersDao().getCharacters() }
         ).flow.map { it.map { entity ->
-            charactersRepositoryImpl.domainMapper.map(entity)
+            entity.toCharacter()
         } }
     }
 

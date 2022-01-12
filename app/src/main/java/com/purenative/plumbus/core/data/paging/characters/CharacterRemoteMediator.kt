@@ -47,7 +47,7 @@ internal class CharacterRemoteMediator(
             val response = charactersRepositoryImpl.getCharactersPage(page = page)
 
             val characters = response?.results?.map {
-                charactersRepositoryImpl.responseMapper.map(it)
+                it.toCharacter()
             } ?: emptyList()
 
             val endOfPaginationReached = characters.isEmpty()
@@ -64,8 +64,8 @@ internal class CharacterRemoteMediator(
                 }
                 plumbusDatabase.charactersRemoteKeysDao().insertAll(keys)
                 plumbusDatabase.charactersDao().insertAll(characters.map {
-                    charactersRepositoryImpl.entityMapper.map(it) }
-                )
+                    it.toCharacterEntity()
+                })
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {

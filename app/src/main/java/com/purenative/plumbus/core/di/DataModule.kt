@@ -13,11 +13,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://rickandmortyapi.com"
+const val DB_NAME = "plumbus.db"
 
 fun dataModule() = module {
     single { createOkHttpClient() }
     single { createApi<PlumbusApi>(get()) }
-    single { CharactersRepositoryImpl(get(), get(), get(), get(), get(), get()) }
+    single { CharactersRepositoryImpl(get(), get(), get()) }
     single { createDatabase(get()) }
     single { (get() as PlumbusDatabase).charactersDao() }
     single { (get() as PlumbusDatabase).followingCharactersDao() }
@@ -26,7 +27,7 @@ fun dataModule() = module {
 fun createDatabase(context: Context): PlumbusDatabase {
     return Room.databaseBuilder(
         context,
-        PlumbusDatabase::class.java, "plumbus.db"
+        PlumbusDatabase::class.java, DB_NAME
     )
         .fallbackToDestructiveMigration()
         .build()

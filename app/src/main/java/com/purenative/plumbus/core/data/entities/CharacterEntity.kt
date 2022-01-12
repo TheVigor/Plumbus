@@ -3,6 +3,7 @@ package com.purenative.plumbus.core.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.purenative.plumbus.core.domain.models.characters.Character
 
 @Entity(tableName = "characters")
 data class CharacterEntity(
@@ -14,5 +15,11 @@ data class CharacterEntity(
         id = id,
         name = name,
         image = image
+    )
+
+    fun toCharacter() = Character(
+        id = id,
+        name = name.orEmpty(),
+        image = image.orEmpty()
     )
 }
