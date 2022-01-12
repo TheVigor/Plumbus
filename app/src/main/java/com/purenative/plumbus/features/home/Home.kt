@@ -81,9 +81,6 @@ private fun NavController.currentScreenAsState(): State<Screen> {
                 destination.hierarchy.any { it.route == Screen.Following.route } -> {
                     selectedItem.value = Screen.Following
                 }
-                destination.hierarchy.any { it.route == Screen.Search.route } -> {
-                    selectedItem.value = Screen.Search
-                }
             }
         }
         addOnDestinationChangedListener(listener)
@@ -184,11 +181,5 @@ private val HomeNavigationItems = listOf(
         contentDescriptionResId = R.string.cd_following,
         iconImageVector = Icons.Default.FavoriteBorder,
         selectedImageVector = Icons.Default.Favorite,
-    ),
-    HomeNavigationItem.ImageVectorIcon(
-        screen = Screen.Search,
-        labelResId = R.string.search,
-        contentDescriptionResId = R.string.cd_search,
-        iconImageVector = Icons.Default.Search,
     ),
 )

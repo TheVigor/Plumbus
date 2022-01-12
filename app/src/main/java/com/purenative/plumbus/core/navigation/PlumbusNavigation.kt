@@ -12,17 +12,14 @@ import com.google.accompanist.navigation.animation.navigation
 import com.purenative.plumbus.features.characterdetails.CharacterDetails
 import com.purenative.plumbus.features.characters.Characters
 import com.purenative.plumbus.features.following.Following
-import com.purenative.plumbus.features.search.Search
 
 const val CHARACTERS_TAG = "characters"
 const val CHARACTER_TAG = "character"
 const val FOLLOWING_TAG = "following"
-const val SEARCH_TAG = "search"
 
 sealed class Screen(val route: String) {
     object Characters: Screen(CHARACTERS_TAG)
     object Following: Screen(FOLLOWING_TAG)
-    object Search: Screen(SEARCH_TAG)
 }
 
 private sealed class LeafScreen(
@@ -38,7 +35,6 @@ private sealed class LeafScreen(
             return "${root.route}/$CHARACTER_TAG/$characterId"
         }
     }
-    object Search : LeafScreen(SEARCH_TAG)
 }
 
 @ExperimentalAnimationApi
@@ -58,7 +54,6 @@ internal fun PlumbusNavigation(
     ) {
         addCharactersTopLevel(navController)
         addFollowingTopLevel(navController)
-        addSearchTopLevel(navController)
     }
 }
 
@@ -89,19 +84,6 @@ private fun NavGraphBuilder.addFollowingTopLevel(
 }
 
 @ExperimentalAnimationApi
-private fun NavGraphBuilder.addSearchTopLevel(
-    navController: NavController,
-) {
-    navigation(
-        route = Screen.Search.route,
-        startDestination = LeafScreen.Search.createRoute(Screen.Search),
-    ) {
-        addSearch(navController, Screen.Search)
-        addCharacterDetails(navController, Screen.Search)
-    }
-}
-
-@ExperimentalAnimationApi
 private fun NavGraphBuilder.addCharacters(
     navController: NavController,
     root: Screen,
@@ -126,17 +108,6 @@ private fun NavGraphBuilder.addFollowing(
             openCharacterDetails = { characterId ->
                 navController.navigate(LeafScreen.CharacterDetails.createRoute(root, characterId))
             },
-        )
-    }
-}
-
-@ExperimentalAnimationApi
-private fun NavGraphBuilder.addSearch(
-    navController: NavController,
-    root: Screen,
-) {
-    composable(LeafScreen.Search.createRoute(root)) {
-        Search(
         )
     }
 }
