@@ -4,7 +4,7 @@ import androidx.paging.*
 import com.purenative.plumbus.core.data.PlumbusDatabase
 import com.purenative.plumbus.core.data.paging.characters.CharacterRemoteMediator
 import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
-import com.purenative.plumbus.core.domain.PagingInteractor
+import com.purenative.plumbus.core.domain.PagingUseCase
 import com.purenative.plumbus.core.domain.models.characters.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 class ObserveCharacters(
     private val charactersRepositoryImpl: CharactersRepositoryImpl,
     private val plumbusDatabase: PlumbusDatabase
-) : PagingInteractor<ObserveCharacters.Params, Character>() {
+) : PagingUseCase<ObserveCharacters.Params, Character>() {
     @OptIn(ExperimentalPagingApi::class)
     override fun createObservable(
         params: Params

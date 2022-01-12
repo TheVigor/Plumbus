@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withTimeout
 import java.util.concurrent.TimeUnit
 
-abstract class Interactor<in P> {
+abstract class UseCase<in P> {
     operator fun invoke(params: P, timeoutMs: Long = defaultTimeoutMs): Flow<InvokeStatus> {
         return flow {
             withTimeout(timeoutMs) {
@@ -37,7 +37,7 @@ abstract class Interactor<in P> {
     }
 }
 
-abstract class ResultInteractor<in P, R> {
+abstract class ResultUseCase<in P, R> {
     operator fun invoke(params: P): Flow<R> = flow {
         emit(doWork(params))
     }
@@ -47,7 +47,7 @@ abstract class ResultInteractor<in P, R> {
     protected abstract suspend fun doWork(params: P): R
 }
 
-abstract class SuspendingWorkInteractor<P : Any, T> : SubjectInteractor<P, T>() {
+abstract class SuspendingWorkUseCase<P : Any, T> : SubjectUseCase<P, T>() {
     override fun createObservable(params: P): Flow<T> = flow {
         emit(doWork(params))
     }
@@ -55,13 +55,13 @@ abstract class SuspendingWorkInteractor<P : Any, T> : SubjectInteractor<P, T>() 
     abstract suspend fun doWork(params: P): T
 }
 
-abstract class PagingInteractor<P : PagingInteractor.Parameters<T>, T : Any> : SubjectInteractor<P, PagingData<T>>() {
+abstract class PagingUseCase<P : PagingUseCase.Parameters<T>, T : Any> : SubjectUseCase<P, PagingData<T>>() {
     interface Parameters<T : Any> {
         val pagingConfig: PagingConfig
     }
 }
 
-abstract class SubjectInteractor<P : Any, T> {
+abstract class SubjectUseCase<P : Any, T> {
     // Ideally this would be buffer = 0, since we use flatMapLatest below, BUT invoke is not
     // suspending. This means that we can't suspend while flatMapLatest cancels any
     // existing flows. The buffer of 1 means that we can use tryEmit() and buffer the value

@@ -3,9 +3,8 @@ package com.purenative.plumbus.features.characterdetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.purenative.plumbus.core.base.InvokeStatus
-import com.purenative.plumbus.core.domain.interactors.ChangeCharacterFollowStatus
-import com.purenative.plumbus.core.domain.interactors.UpdateCharacterDetails
-import com.purenative.plumbus.core.domain.models.characters.Character
+import com.purenative.plumbus.core.domain.usecases.ChangeCharacterFollowStatus
+import com.purenative.plumbus.core.domain.usecases.UpdateCharacterDetails
 import com.purenative.plumbus.core.domain.observers.ObserveCharacterDetails
 import com.purenative.plumbus.core.domain.observers.ObserveCharacterFollowStatus
 import com.purenative.plumbus.core.ui.ObservableLoadingCounter

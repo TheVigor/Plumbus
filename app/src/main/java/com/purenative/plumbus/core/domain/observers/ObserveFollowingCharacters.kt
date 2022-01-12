@@ -5,14 +5,14 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.purenative.plumbus.core.data.repositories.characters.CharactersRepositoryImpl
-import com.purenative.plumbus.core.domain.PagingInteractor
+import com.purenative.plumbus.core.domain.PagingUseCase
 import com.purenative.plumbus.core.domain.models.characters.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class ObserveFollowingCharacters(
     private val repository: CharactersRepositoryImpl
-) : PagingInteractor<ObserveFollowingCharacters.Params, Character>() {
+) : PagingUseCase<ObserveFollowingCharacters.Params, Character>() {
 
     override fun createObservable(
         params: Params
