@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -23,7 +24,9 @@ import com.purenative.plumbus.core.ui.bodyWidth
 import com.purenative.plumbus.core.ui.itemSpacer
 import com.purenative.plumbus.core.ui.itemsInGrid
 import com.purenative.plumbus.core.ui.theme.AppBarAlphas
-import com.purenative.plumbus.features.characters.PosterCard
+import com.purenative.plumbus.features.characters.CharacterSurface
+import com.purenative.plumbus.features.characters.poster.CharacterCard
+import com.purenative.plumbus.features.characters.poster.CharacterImage
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -100,14 +103,14 @@ internal fun Following(
 
                 itemsInGrid(
                     lazyPagingItems = list,
-                    columns = columns / 4,
+                    columns = 1,
                     // We minus 8.dp off the grid padding, as we use content padding on the items below
                     contentPadding = PaddingValues(
                         horizontal = (bodyMargin - 8.dp).coerceAtLeast(0.dp),
                         vertical = (gutter - 8.dp).coerceAtLeast(0.dp),
                     ),
-                    verticalItemPadding = (gutter - 8.dp).coerceAtLeast(0.dp),
-                    horizontalItemPadding = (gutter - 8.dp).coerceAtLeast(0.dp),
+                    verticalItemPadding = (gutter - 8.dp).coerceAtLeast(8.dp),
+                    horizontalItemPadding = (gutter - 8.dp).coerceAtLeast(8.dp),
                 ) { entry ->
                     if (entry != null) {
                         FollowingShowItem(
@@ -156,27 +159,37 @@ private fun FollowingShowItem(
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier
-            .clip(MaterialTheme.shapes.medium)
-            .clickable(onClick = onClick)
-            .padding(contentPadding)
+    CharacterSurface(
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier
     ) {
-        PosterCard(
-            character = character,
-            modifier = Modifier
-                .fillMaxWidth(0.2f) // 20% of the width
-                .aspectRatio(2 / 3f)
-        )
-
-        Spacer(Modifier.width(16.dp))
-
-        Column {
-            Text(
-                text = character.name,
-                style = MaterialTheme.typography.subtitle1,
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier
+                .height(120.dp)
+                .clip(MaterialTheme.shapes.medium)
+                .clickable(onClick = onClick)
+                .padding(contentPadding)
+        ) {
+            CharacterImage(
+                imageUrl = character.image,
+                elevation = 4.dp,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .size(80.dp)
             )
 
+            Spacer(Modifier.width(16.dp))
+
+            Column {
+                Text(
+                    text = character.name,
+                    style = MaterialTheme.typography.subtitle1,
+                )
+
+            }
         }
     }
 }

@@ -4,25 +4,21 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.purenative.plumbus.R
 import com.purenative.plumbus.core.domain.models.characters.Character
 import com.purenative.plumbus.core.ui.theme.AppBarAlphas
-import com.purenative.plumbus.features.characters.PlaceholderPosterCard
-import com.purenative.plumbus.features.characters.PosterCard
 import com.purenative.plumbus.features.characters.RefreshButton
+import com.purenative.plumbus.features.characters.poster.CharacterCard
+import com.purenative.plumbus.features.characters.poster.PlaceholderCharacterCard
 
 @Composable
 fun EntryGrid(
@@ -74,16 +70,16 @@ fun EntryGrid(
                     horizontalItemPadding = gutter,
                 ) { entry ->
                     val mod = Modifier
-                        .aspectRatio(2 / 3f)
+                        .aspectRatio(0.9f)
                         .fillMaxWidth()
                     if (entry != null) {
-                        PosterCard(
+                        CharacterCard(
                             character = entry,
-                            onClick = { onOpenShowDetails(entry.id) },
+                            onCharacterClicked = { onOpenShowDetails(entry.id) },
                             modifier = mod
                         )
                     } else {
-                        PlaceholderPosterCard(mod)
+                        PlaceholderCharacterCard(mod)
                     }
                 }
 
