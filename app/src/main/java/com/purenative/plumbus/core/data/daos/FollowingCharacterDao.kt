@@ -19,6 +19,10 @@ interface FollowingCharacterDao {
     @Query("SELECT * FROM following_characters")
     fun getFollowingCharacters(): PagingSource<Int, FollowingCharacterEntity>
 
+    @Query("SELECT * FROM following_characters WHERE name LIKE '%' || :filter || '%'")
+    fun getFollowingCharactersFiltered(filter: String?): PagingSource<Int, FollowingCharacterEntity>
+
+
     @Query("SELECT * FROM following_characters WHERE id=:id")
     fun getFollowingCharacter(id: Int): FollowingCharacterEntity?
 

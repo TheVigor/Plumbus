@@ -15,7 +15,7 @@ interface CharactersRepository {
     fun observerCharacter(id: Int): Flow<Character>
     suspend fun getCharacter(id: Int): CharacterEntity?
 
-    fun getPagedFollowingCharacters(): PagingSource<Int, FollowingCharacterEntity>
+    fun getPagedFollowingCharacters(filter: String?): PagingSource<Int, FollowingCharacterEntity>
 
     suspend fun addFollowingCharacter(character: FollowingCharacterEntity)
     suspend fun deleteFollowingCharacter(characterId: Int)

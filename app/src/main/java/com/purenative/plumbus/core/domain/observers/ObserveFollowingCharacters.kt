@@ -17,7 +17,7 @@ class ObserveFollowingCharacters(
     override fun createObservable(
         params: Params
     ): Flow<PagingData<Character>> = Pager(config = params.pagingConfig) {
-        repository.getPagedFollowingCharacters()
+        repository.getPagedFollowingCharacters(params.filter)
     }.flow.map { it.map { entity -> entity.toCharacter() } }
 
     data class Params(

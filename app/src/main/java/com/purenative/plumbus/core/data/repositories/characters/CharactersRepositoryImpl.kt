@@ -39,8 +39,14 @@ class CharactersRepositoryImpl(
         return characterDao.getCharacter(id)
     }
 
-    override fun getPagedFollowingCharacters(): PagingSource<Int, FollowingCharacterEntity> {
-        return followingCharacterDao.getFollowingCharacters()
+    override fun getPagedFollowingCharacters(filter: String?): PagingSource<Int, FollowingCharacterEntity> {
+        val filtered = filter != null && filter.trim().isNotEmpty()
+
+        return if (filtered) {
+            followingCharacterDao.getFollowingCharactersFiltered(filter)
+        } else {
+            followingCharacterDao.getFollowingCharacters()
+        }
     }
 
     override suspend fun addFollowingCharacter(character: FollowingCharacterEntity) {
