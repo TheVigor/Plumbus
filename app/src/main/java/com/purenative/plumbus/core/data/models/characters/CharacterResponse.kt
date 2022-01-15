@@ -10,17 +10,29 @@ data class CharacterResponse(
     @SerializedName("name")
     val name: String,
     @SerializedName("image")
-    val image: String
+    val image: String,
+    @SerializedName("species")
+    val species: String,
+    @SerializedName("gender")
+    val gender: String,
+    @SerializedName("status")
+    val status: String
 ) {
     fun toCharacterEntity() = CharacterEntity(
         id = id,
         name = name,
-        image = image
+        image = image,
+        species = species,
+        gender = gender,
+        status = status
     )
 
     fun toCharacter() = Character(
         id = id,
         name = name,
-        image = image
+        image = image,
+        species = species,
+        gender = gender,
+        status = status
     )
 }

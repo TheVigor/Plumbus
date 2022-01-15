@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -78,10 +79,18 @@ fun CharacterDetails(
     Box(Modifier.fillMaxSize()) {
         val scroll = rememberScrollState(0)
         Header()
-        Body(scroll)
+        Body(viewState.character, scroll)
         Title(viewState.character, scroll.value)
         Image(imageUrl = viewState.character.image, scroll = scroll.value)
         Up(actioner)
+        ToggleShowFollowFloatingActionButton(
+            isFollowed = viewState.isFollowed,
+            expanded = { false },
+            onClick = { actioner(CharacterDetailsAction.FollowShowToggleAction) },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        )
     }
 }
 
@@ -94,7 +103,7 @@ private fun Header() {
             .background(
                 Brush.horizontalGradient(
                     listOf(
-                        Color.Cyan, Color.Green
+                        Color(0xff97ce4c), Color(0xffe4a788)
                     )
                 )
             )
@@ -110,7 +119,7 @@ private fun Up(upPress: (CharacterDetailsAction) -> Unit) {
             .padding(horizontal = 16.dp, vertical = 10.dp)
             .size(36.dp)
             .background(
-                color = Color.Black.copy(alpha = 0.32f),
+                color = Color.LightGray.copy(alpha = 0.77f),
                 shape = CircleShape
             )
     ) {
@@ -123,6 +132,7 @@ private fun Up(upPress: (CharacterDetailsAction) -> Unit) {
 
 @Composable
 private fun Body(
+    character: Character,
     scroll: ScrollState
 ) {
     Column {
@@ -140,22 +150,24 @@ private fun Body(
                 Column {
                     Spacer(Modifier.height(ImageOverlap))
                     Spacer(Modifier.height(TitleHeight))
-
-                    Spacer(Modifier.height(16.dp))
                     Text(
-                        text = "Detail Header",
-                        style = MaterialTheme.typography.overline,
+                        text = character.species,
+                        style = MaterialTheme.typography.body1,
                         color = MaterialTheme.colors.primary,
                         modifier = HzPadding
                     )
-                    Spacer(Modifier.height(16.dp))
-                    var seeMore by remember { mutableStateOf(true) }
+                    Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Detail Placeholder",
+                        text = character.gender,
                         style = MaterialTheme.typography.body1,
                         color = MaterialTheme.colors.primary,
-                        maxLines = if (seeMore) 5 else Int.MAX_VALUE,
-                        overflow = TextOverflow.Ellipsis,
+                        modifier = HzPadding
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text = character.status,
+                        style = MaterialTheme.typography.overline,
+                        color = MaterialTheme.colors.primary,
                         modifier = HzPadding
                     )
                     Spacer(
@@ -181,23 +193,16 @@ private fun Title(character: Character, scroll: Int) {
             .heightIn(min = TitleHeight)
             .statusBarsPadding()
             .graphicsLayer { translationY = offset }
-            .background(color = MaterialTheme.colors.background)
+            .fillMaxWidth()
     ) {
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(8.dp))
         Text(
             text = character.name,
             style = MaterialTheme.typography.h4,
             color = MaterialTheme.colors.onSecondary,
             modifier = HzPadding
         )
-        Text(
-            text = character.name,
-            style = MaterialTheme.typography.subtitle2,
-            fontSize = 20.sp,
-            color = MaterialTheme.colors.onSecondary,
-            modifier = HzPadding
-        )
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(8.dp))
     }
 }
 
@@ -318,44 +323,4 @@ private fun CollapsingImageLayout(
 //    }
 //}
 
-@Composable
-private fun CharacterDetailsAppBar(
-    backgroundColor: Color,
-    isRefreshing: Boolean,
-    actioner: (CharacterDetailsAction) -> Unit,
-    elevation: Dp,
-    modifier: Modifier = Modifier
-) {
-    TopAppBar(
-        title = {},
-        navigationIcon = {
-            IconButton(onClick = { actioner(CharacterDetailsAction.NavigateUp) }) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(R.string.cd_close),
-                )
-            }
-        },
-        actions = {
-            if (isRefreshing) {
-                AutoSizedCircularProgressIndicator(
-                    modifier = Modifier
-                        .aspectRatio(1f)
-                        .fillMaxHeight()
-                        .padding(14.dp)
-                )
-            } else {
-                IconButton(onClick = { actioner(CharacterDetailsAction.RefreshAction(true)) }) {
-                    Icon(
-                        imageVector = Icons.Default.Refresh,
-                        contentDescription = stringResource(R.string.cd_refresh)
-                    )
-                }
-            }
-        },
-        elevation = elevation,
-        backgroundColor = backgroundColor,
-        modifier = modifier
-    )
-}
 
