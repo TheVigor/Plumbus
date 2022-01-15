@@ -5,3 +5,6 @@ Plumbus is an app based on [Rick and Morty API](https://rickandmortyapi.com) tha
  * Uses [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) throughout.
  * Uses many of the [Architecture Components](https://developer.android.com/topic/libraries/architecture/), including: Room, Lifecycle, Navigation.
  * Uses [Koin](https://insert-koin.io) for dependency injection
+
+<a href="screenshots/01.png"><img src="screenshots/01.png" width="30%"/></a>
+<a href="screenshots/02.png"><img src="screenshots/02.png" width="30%"/></a>
